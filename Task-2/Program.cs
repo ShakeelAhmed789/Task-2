@@ -8,9 +8,9 @@ namespace Task_2
         {
             Random random = new Random();
             int secretNumber = random.Next(1, 50);
-            bool loopTerminator = false;
             int inputNumber = 0;
             int counter = 0;
+            bool loopTerminator = false;
 
             Console.WriteLine("\n****** Number Guessing Game ******\n");
             Console.WriteLine("Rules:\n" +
@@ -22,7 +22,7 @@ namespace Task_2
 
             while (!loopTerminator)
             {
-                inputNumber = GetInput(inputNumber);
+                inputNumber = GetInput();
 
                 counter++;
 
@@ -42,8 +42,10 @@ namespace Task_2
             Console.WriteLine($"You guessed the number in {counter} attempts.");
         }
 
-        static int GetInput(int inputNumber)
+        static int GetInput()
         {
+            int inputNumber;
+
             Console.Write("\nPlease enter a number: ");
 
             while (!int.TryParse(Console.ReadLine(), out inputNumber))
