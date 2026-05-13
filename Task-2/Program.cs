@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Task_2
 {
@@ -8,11 +8,9 @@ namespace Task_2
         {
             Random random = new Random();
             int secretNumber = random.Next(1, 50);
-            bool sign = true;
-            int guessedNumber;
+            bool loopTerminator = false;
+            int inputNumber = 0;
             int counter = 0;
-
-            //Console.WriteLine(secretNumber);
 
             Console.WriteLine("\n****** Number Guessing Game ******\n");
             Console.WriteLine("Rules:\n" +
@@ -22,23 +20,17 @@ namespace Task_2
             Console.WriteLine("Guess the secret number.");
             Console.WriteLine("Hint: The number is between 0 and 50.");
 
-            while (sign)
+            while (!loopTerminator)
             {
-
-                Console.Write("\nPlease enter a number: ");
-
-                while (!int.TryParse(Console.ReadLine(), out guessedNumber))
-                {
-                    Console.Write("Invalid input! Try again.\n\nPlease enter a number: ");
-                }
+                inputNumber = GetInput(inputNumber);
 
                 counter++;
 
-                if (guessedNumber == secretNumber)
-                    sign = false;
-                if (guessedNumber > secretNumber + 10)
+                if (inputNumber == secretNumber)
+                    loopTerminator = true;
+                if (inputNumber > secretNumber + 10)
                     Console.WriteLine("Too high! Try again.");
-                else if (guessedNumber < secretNumber - 10)
+                else if (inputNumber < secretNumber - 10)
                     Console.WriteLine("Too low! Try again.");
 
             }
@@ -49,7 +41,21 @@ namespace Task_2
 
             Console.WriteLine($"You guessed the number in {counter} attempts.");
         }
+
+        static int GetInput(int inputNumber)
+        {
+            Console.Write("\nPlease enter a number: ");
+
+            while (!int.TryParse(Console.ReadLine(), out inputNumber))
+            {
+                Console.Write("Invalid input! Try again.\n\nPlease enter a number: ");
+            }
+
+            return inputNumber;
+        }
+
     }
+
 }
 
 /*
